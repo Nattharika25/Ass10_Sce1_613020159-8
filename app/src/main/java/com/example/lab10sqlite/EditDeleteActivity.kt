@@ -47,4 +47,23 @@ class EditDeleteActivity : AppCompatActivity() {
         }
             finish()
         }
+    fun deleteStudent(v: View){
+        val myBuilder = AlertDialog.Builder(this)
+        myBuilder.apply {
+            setTitle("Warning")
+            setMessage("Do you want to delete the student?")
+            setNegativeButton("Yes") { dialog, which ->
+                val result = dbHandler?.deleteStudent(edt_id.text.toString())
+                if (result!! > -1) {
+                    Toast.makeText(applicationContext, "Deleted successfully", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(applicationContext, "Delete Failure", Toast.LENGTH_LONG).show()
+                }
+                finish()
+            }
+            setPositiveButton ("No"){ dialog, which ->dialog.cancel()}
+            show()
+        }
+    }
+}
     }
